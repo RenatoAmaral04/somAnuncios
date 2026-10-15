@@ -54,7 +54,7 @@ declare global {
 const GOOGLE_ADS_ID = "AW-18341027143";
 // Cole aqui o RÓTULO da conversão criada no Google Ads: é a parte depois da "/" em
 // 'send_to': 'AW-18341027143/XXXXXXXX'. Enquanto estiver vazio, só o evento "whatsapp_click" é enviado.
-const GOOGLE_ADS_CONVERSION_LABEL: string = "";
+const GOOGLE_ADS_CONVERSION_LABEL: string = "3T8mCMu8udQcEMe616lE";
 
 // Chamada a cada clique em um botão de WhatsApp (e no envio do formulário, que abre o WhatsApp).
 function trackWhatsApp(source: string) {
