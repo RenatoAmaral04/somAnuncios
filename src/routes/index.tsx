@@ -48,15 +48,21 @@ function whatsappUrl(message: string = WHATSAPP_DEFAULT_MESSAGE) {
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
-    dataLayer?: unknown[];
   }
 }
 
-// Evento de conversão: use "whatsapp_click" como conversão no Google Ads / GA4.
+const GOOGLE_ADS_ID = "AW-18341027143";
+// Cole aqui o RÓTULO da conversão criada no Google Ads: é a parte depois da "/" em
+// 'send_to': 'AW-18341027143/XXXXXXXX'. Enquanto estiver vazio, só o evento "whatsapp_click" é enviado.
+const GOOGLE_ADS_CONVERSION_LABEL: string = "";
+
+// Chamada a cada clique em um botão de WhatsApp (e no envio do formulário, que abre o WhatsApp).
 function trackWhatsApp(source: string) {
   if (typeof window === "undefined") return;
   window.gtag?.("event", "whatsapp_click", { source });
-  window.dataLayer?.push({ event: "whatsapp_click", source });
+  if (GOOGLE_ADS_CONVERSION_LABEL) {
+    window.gtag?.("event", "conversion", { send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_CONVERSION_LABEL}` });
+  }
 }
 
 const events = [
